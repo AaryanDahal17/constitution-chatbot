@@ -88,3 +88,211 @@ Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
 2025-03-04 18:10:29.857 [info] > git check-ignore -v -z --stdin [3ms]
 2025-03-04 18:10:29.997 [info] > git show --textconv :README.md [3ms]
 2025-03-04 18:10:29.999 [info] > git ls-files --stage -- /teamspace/studios/this_studio/README.md [2ms]
+2025-03-04 18:10:41.075 [info] > git ls-files --stage -- /teamspace/studios/this_studio/README.md [4ms]
+2025-03-04 18:10:41.082 [info] > git cat-file -s 6844c1db92d953f5067eb168a75c7fd0285a636f [3ms]
+2025-03-04 18:10:41.422 [info] > git show --textconv :README.md [5ms]
+2025-03-04 18:10:41.578 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:10:41.583 [info] > git config --get commit.template [9ms]
+2025-03-04 18:10:41.586 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [8ms]
+2025-03-04 18:10:41.586 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:10:41.604 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [10ms]
+2025-03-04 18:10:41.607 [info] > git status -z -uall [16ms]
+2025-03-04 18:10:42.404 [info] > git show --textconv HEAD:README.md [5ms]
+2025-03-04 18:10:42.408 [info] > git ls-tree -l HEAD -- /teamspace/studios/this_studio/README.md [5ms]
+2025-03-04 18:10:42.408 [info] fatal: Not a valid object name HEAD
+2025-03-04 18:10:47.569 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:10:47.570 [info] > git config --get commit.template [5ms]
+2025-03-04 18:10:47.571 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:10:47.571 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:10:47.579 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:10:47.581 [info] > git status -z -uall [7ms]
+2025-03-04 18:10:52.600 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:10:52.601 [info] > git config --get commit.template [5ms]
+2025-03-04 18:10:52.602 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2025-03-04 18:10:52.602 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:10:52.610 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:10:52.613 [info] > git status -z -uall [8ms]
+2025-03-04 18:10:56.676 [info] > git ls-files --stage -- /teamspace/studios/this_studio/README.md [3ms]
+2025-03-04 18:10:56.680 [info] > git ls-tree -l HEAD -- /teamspace/studios/this_studio/README.md [4ms]
+2025-03-04 18:10:56.680 [info] fatal: Not a valid object name HEAD
+2025-03-04 18:10:56.682 [info] > git cat-file -s 6844c1db92d953f5067eb168a75c7fd0285a636f [2ms]
+2025-03-04 18:10:57.018 [info] > git show --textconv HEAD:README.md [3ms]
+2025-03-04 18:10:57.028 [info] > git show --textconv :README.md [3ms]
+2025-03-04 18:10:57.628 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:10:57.629 [info] > git config --get commit.template [4ms]
+2025-03-04 18:10:57.631 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:10:57.631 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:10:57.640 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2ms]
+2025-03-04 18:10:57.642 [info] > git status -z -uall [9ms]
+2025-03-04 18:11:02.654 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:02.659 [info] > git config --get commit.template [5ms]
+2025-03-04 18:11:02.661 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:11:02.661 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:11:02.669 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:11:02.671 [info] > git status -z -uall [7ms]
+2025-03-04 18:11:07.682 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:07.686 [info] > git config --get commit.template [5ms]
+2025-03-04 18:11:07.688 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2025-03-04 18:11:07.688 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:11:07.697 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:11:07.698 [info] > git status -z -uall [7ms]
+2025-03-04 18:11:12.714 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:12.715 [info] > git config --get commit.template [5ms]
+2025-03-04 18:11:12.718 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [5ms]
+2025-03-04 18:11:12.718 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:11:12.729 [info] > git status -z -uall [8ms]
+2025-03-04 18:11:12.732 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [6ms]
+2025-03-04 18:11:17.749 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:17.751 [info] > git config --get commit.template [6ms]
+2025-03-04 18:11:17.752 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:11:17.752 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:11:17.763 [info] > git status -z -uall [8ms]
+2025-03-04 18:11:17.763 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [4ms]
+2025-03-04 18:11:22.778 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:22.780 [info] > git config --get commit.template [5ms]
+2025-03-04 18:11:22.781 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:11:22.781 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:11:22.788 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2ms]
+2025-03-04 18:11:22.790 [info] > git status -z -uall [6ms]
+2025-03-04 18:11:26.463 [info] > git ls-files --stage -- /teamspace/studios/this_studio/README.md [11ms]
+2025-03-04 18:11:26.475 [info] > git ls-tree -l HEAD -- /teamspace/studios/this_studio/README.md [13ms]
+2025-03-04 18:11:26.475 [info] fatal: Not a valid object name HEAD
+2025-03-04 18:11:26.477 [info] > git cat-file -s 6844c1db92d953f5067eb168a75c7fd0285a636f [3ms]
+2025-03-04 18:11:26.825 [info] > git show --textconv HEAD:README.md [4ms]
+2025-03-04 18:11:26.831 [info] > git show --textconv :README.md [6ms]
+2025-03-04 18:11:27.804 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:27.805 [info] > git config --get commit.template [4ms]
+2025-03-04 18:11:27.807 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:11:27.807 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:11:27.814 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2ms]
+2025-03-04 18:11:27.818 [info] > git status -z -uall [9ms]
+2025-03-04 18:11:32.830 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:32.835 [info] > git config --get commit.template [5ms]
+2025-03-04 18:11:32.836 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2025-03-04 18:11:32.836 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:11:32.843 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2ms]
+2025-03-04 18:11:32.846 [info] > git status -z -uall [7ms]
+2025-03-04 18:11:36.948 [info] > git ls-files --stage -- /teamspace/studios/this_studio/README.md [4ms]
+2025-03-04 18:11:36.952 [info] > git ls-tree -l HEAD -- /teamspace/studios/this_studio/README.md [5ms]
+2025-03-04 18:11:36.952 [info] fatal: Not a valid object name HEAD
+2025-03-04 18:11:36.954 [info] > git cat-file -s 6844c1db92d953f5067eb168a75c7fd0285a636f [3ms]
+2025-03-04 18:11:37.288 [info] > git show --textconv HEAD:README.md [3ms]
+2025-03-04 18:11:37.291 [info] > git show --textconv :README.md [2ms]
+2025-03-04 18:11:37.857 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:37.858 [info] > git config --get commit.template [3ms]
+2025-03-04 18:11:37.860 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:11:37.860 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:11:37.867 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:11:37.869 [info] > git status -z -uall [7ms]
+2025-03-04 18:11:40.619 [info] > git ls-files --stage -- /teamspace/studios/this_studio/README.md [3ms]
+2025-03-04 18:11:40.622 [info] > git ls-tree -l HEAD -- /teamspace/studios/this_studio/README.md [4ms]
+2025-03-04 18:11:40.624 [info] > git cat-file -s 6844c1db92d953f5067eb168a75c7fd0285a636f [3ms]
+2025-03-04 18:11:41.008 [info] > git show --textconv HEAD:README.md [5ms]
+2025-03-04 18:11:41.011 [info] > git show --textconv :README.md [4ms]
+2025-03-04 18:11:42.882 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:42.883 [info] > git config --get commit.template [4ms]
+2025-03-04 18:11:42.885 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:11:42.896 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:11:42.898 [info] > git status -z -uall [9ms]
+2025-03-04 18:11:43.915 [info] > git blame --root --incremental 097dd7424394c8e1c674a85119f6271f9d36b7df -- /teamspace/studios/this_studio/README.md [4ms]
+2025-03-04 18:11:44.333 [info] > git ls-files --stage -- /teamspace/studios/this_studio/README.md [3ms]
+2025-03-04 18:11:44.338 [info] > git cat-file -s 6844c1db92d953f5067eb168a75c7fd0285a636f [2ms]
+2025-03-04 18:11:44.717 [info] > git show --textconv :README.md [4ms]
+2025-03-04 18:11:47.910 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:47.911 [info] > git config --get commit.template [4ms]
+2025-03-04 18:11:47.912 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2025-03-04 18:11:47.920 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:11:47.922 [info] > git status -z -uall [7ms]
+2025-03-04 18:11:52.932 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:52.934 [info] > git config --get commit.template [4ms]
+2025-03-04 18:11:52.935 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:11:52.942 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:11:52.944 [info] > git status -z -uall [7ms]
+2025-03-04 18:11:57.950 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:11:57.954 [info] > git config --get commit.template [5ms]
+2025-03-04 18:11:57.956 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:11:57.963 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2ms]
+2025-03-04 18:11:57.965 [info] > git status -z -uall [6ms]
+2025-03-04 18:12:02.976 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:12:02.978 [info] > git config --get commit.template [6ms]
+2025-03-04 18:12:02.979 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:12:02.991 [info] > git status -z -uall [9ms]
+2025-03-04 18:12:02.992 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [7ms]
+2025-03-04 18:12:06.411 [info] > git show --textconv :.gitignore [8ms]
+2025-03-04 18:12:06.412 [info] > git ls-files --stage -- /teamspace/studios/this_studio/.gitignore [5ms]
+2025-03-04 18:12:06.418 [info] > git cat-file -s 46e7ef18961f903182f392fb523aefd3df117d06 [3ms]
+2025-03-04 18:12:07.540 [info] > git blame --root --incremental 097dd7424394c8e1c674a85119f6271f9d36b7df -- /teamspace/studios/this_studio/.gitignore [3ms]
+2025-03-04 18:12:08.000 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:12:08.000 [info] > git config --get commit.template [3ms]
+2025-03-04 18:12:08.003 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [4ms]
+2025-03-04 18:12:08.011 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:12:08.014 [info] > git status -z -uall [8ms]
+2025-03-04 18:12:13.020 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:12:13.025 [info] > git config --get commit.template [5ms]
+2025-03-04 18:12:13.027 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:12:13.036 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:12:13.039 [info] > git status -z -uall [9ms]
+2025-03-04 18:12:13.883 [info] > git check-ignore -v -z --stdin [3ms]
+2025-03-04 18:12:18.049 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:12:18.051 [info] > git config --get commit.template [6ms]
+2025-03-04 18:12:18.052 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:12:18.062 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:12:18.065 [info] > git status -z -uall [9ms]
+2025-03-04 18:12:19.002 [info] > git check-ignore -v -z --stdin [3ms]
+2025-03-04 18:12:21.819 [info] > git check-ignore -v -z --stdin [8ms]
+2025-03-04 18:12:24.813 [info] > git check-ignore -v -z --stdin [3ms]
+2025-03-04 18:12:26.582 [info] > git check-ignore -v -z --stdin [3ms]
+2025-03-04 18:12:27.603 [info] > git config --get commit.template [3ms]
+2025-03-04 18:12:27.610 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:12:27.615 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [5ms]
+2025-03-04 18:12:27.636 [info] > git status -z -uall [17ms]
+2025-03-04 18:12:27.641 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [9ms]
+2025-03-04 18:12:32.650 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:12:32.651 [info] > git config --get commit.template [4ms]
+2025-03-04 18:12:32.652 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2025-03-04 18:12:32.660 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2ms]
+2025-03-04 18:12:32.664 [info] > git status -z -uall [9ms]
+2025-03-04 18:12:33.100 [info] > git check-ignore -v -z --stdin [3ms]
+2025-03-04 18:12:37.674 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:12:37.675 [info] > git config --get commit.template [5ms]
+2025-03-04 18:12:37.676 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2025-03-04 18:12:37.689 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [5ms]
+2025-03-04 18:12:37.690 [info] > git status -z -uall [9ms]
+2025-03-04 18:12:42.696 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:12:42.701 [info] > git config --get commit.template [6ms]
+2025-03-04 18:12:42.703 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:12:42.713 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [4ms]
+2025-03-04 18:12:42.715 [info] > git status -z -uall [9ms]
+2025-03-04 18:12:45.406 [info] > git ls-files --stage -- /teamspace/studios/this_studio/.gitignore [3ms]
+2025-03-04 18:12:45.412 [info] > git cat-file -s 46e7ef18961f903182f392fb523aefd3df117d06 [3ms]
+2025-03-04 18:12:45.758 [info] > git show --textconv :.gitignore [4ms]
+2025-03-04 18:12:47.725 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:12:47.726 [info] > git config --get commit.template [5ms]
+2025-03-04 18:12:47.727 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2025-03-04 18:12:47.735 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2ms]
+2025-03-04 18:12:47.738 [info] > git status -z -uall [8ms]
+2025-03-04 18:13:36.268 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:13:36.269 [info] > git config --get commit.template [6ms]
+2025-03-04 18:13:36.270 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:13:36.281 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:13:36.284 [info] > git status -z -uall [9ms]
+2025-03-04 18:13:41.292 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:13:41.293 [info] > git config --get commit.template [4ms]
+2025-03-04 18:13:41.295 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [3ms]
+2025-03-04 18:13:41.308 [info] > git status -z -uall [10ms]
+2025-03-04 18:13:41.309 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:13:46.323 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:13:46.325 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2025-03-04 18:13:46.325 [info] > git config --get commit.template [9ms]
+2025-03-04 18:13:46.339 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [4ms]
+2025-03-04 18:13:46.344 [info] > git status -z -uall [14ms]
+2025-03-04 18:13:51.353 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:13:51.354 [info] > git config --get commit.template [4ms]
+2025-03-04 18:13:51.359 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [6ms]
+2025-03-04 18:13:51.372 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [7ms]
+2025-03-04 18:13:51.374 [info] > git status -z -uall [13ms]
+2025-03-04 18:13:56.383 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:13:56.384 [info] > git config --get commit.template [4ms]
+2025-03-04 18:13:56.385 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2025-03-04 18:13:56.392 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2ms]
+2025-03-04 18:13:56.403 [info] > git status -z -uall [15ms]
