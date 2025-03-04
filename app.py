@@ -80,5 +80,6 @@ def main():
         result = qa_chain.invoke({"question": query})
         print("\nAnswer:", result["answer"])
 
+
 if __name__ == "__main__":
     main() 
