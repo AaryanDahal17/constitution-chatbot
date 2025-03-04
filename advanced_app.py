@@ -192,11 +192,11 @@ def display_sidebar():
         help="Use a custom prompt template for better responses"
     )
     
-    # Clear chat history
-    if st.sidebar.button("Clear Chat History"):
-        st.session_state.messages = []
-        st.session_state.conversation = None
-        st.experimental_rerun()
+    # # Clear chat history
+    # if st.sidebar.button("Clear Chat History"):
+    #     st.session_state.messages = []
+    #     st.session_state.conversation = None
+    #     st.experimental_rerun()
     
     return {
         "model_name": model_name,
