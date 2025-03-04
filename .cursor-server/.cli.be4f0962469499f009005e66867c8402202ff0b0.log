@@ -1,4 +1,0 @@
-Listening on 127.0.0.1:50411
-[2025-03-04 17:10:41] info Disposed of connection to running server.
-[2025-03-04 17:10:41] info Checking /teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/log.txt and /teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/pid.txt for a running server...
-[2025-03-04 17:10:41] info Found running server (pid=6163)
