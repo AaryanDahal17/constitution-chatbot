@@ -41,6 +41,8 @@ ENV/
 
 .lightning_studio
 .cursor-server
+.vscode-server
+.wget-hsts
 # OS specific
 .DS_Store
 .DS_Store?
