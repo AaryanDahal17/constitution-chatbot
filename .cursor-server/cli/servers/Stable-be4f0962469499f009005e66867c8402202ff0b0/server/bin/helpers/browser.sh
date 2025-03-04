@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+#
+# Copyright (c) Microsoft Corporation. All rights reserved.
+#
+ROOT="$(dirname "$(dirname "$(dirname "$(readlink -f "$0")")")")"
+
+APP_NAME="cursor"
+VERSION="0.46.8"
+COMMIT="be4f0962469499f009005e66867c8402202ff0b0"
+EXEC_NAME="cursor"
+CLI_SCRIPT="$ROOT/out/server-cli.js"
+"$ROOT/node" "$CLI_SCRIPT" "$APP_NAME" "$VERSION" "$COMMIT" "$EXEC_NAME" "--openExternal" "$@"

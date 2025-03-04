@@ -1,0 +1,8 @@
+langchain==0.1.5
+langchain-groq==0.0.6
+langchain-community==0.0.16
+pypdf==3.17.1
+faiss-cpu==1.7.4
+sentence-transformers==2.2.2
+python-dotenv==1.0.0
+streamlit==1.30.0 

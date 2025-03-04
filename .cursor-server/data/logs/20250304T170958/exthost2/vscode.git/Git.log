@@ -1,0 +1,90 @@
+2025-03-04 17:10:50.529 [info] [main] Log level: Info
+2025-03-04 17:10:50.529 [info] [main] Validating found git in: "git"
+2025-03-04 17:10:50.529 [info] [main] Using git "2.42.0" from "git"
+2025-03-04 17:10:50.529 [info] [Model][doInitialScan] Initial repository scan started
+2025-03-04 17:10:50.529 [info] > git rev-parse --show-toplevel [5ms]
+2025-03-04 17:10:50.529 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:10:50.529 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:10:50.529 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:10:50.529 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:10:50.529 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:10:50.529 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:10:50.529 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:10:50.529 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:10:50.529 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:10:50.529 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:10:50.529 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:10:50.529 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:10:50.529 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:10:50.529 [info] > git rev-parse --show-toplevel [1ms]
+2025-03-04 17:10:50.529 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:10:50.529 [info] [Model][doInitialScan] Initial repository scan completed - repositories (0), closed repositories (0), parent repositories (0), unsafe repositories (0)
+2025-03-04 17:11:16.683 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:11:16.683 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:20:06.607 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:20:06.608 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:24:38.836 [info] > git rev-parse --show-toplevel [3ms]
+2025-03-04 17:24:38.837 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:24:52.826 [info] > git rev-parse --show-toplevel [3ms]
+2025-03-04 17:24:52.827 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:25:29.290 [info] > git rev-parse --show-toplevel [69ms]
+2025-03-04 17:25:29.291 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:27:17.256 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:27:17.257 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:27:24.066 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:27:24.066 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:31:47.091 [info] > git rev-parse --show-toplevel [3ms]
+2025-03-04 17:31:47.092 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:46:33.333 [info] > git rev-parse --show-toplevel [3ms]
+2025-03-04 17:46:33.334 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:48:02.365 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:48:02.366 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:48:07.208 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 17:48:07.209 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 17:48:52.049 [info] > git rev-parse --show-toplevel [1ms]
+2025-03-04 17:48:52.051 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 18:00:41.401 [info] > git rev-parse --show-toplevel [4ms]
+2025-03-04 18:00:41.402 [info] fatal: not a git repository (or any parent up to mount point /teamspace/studios)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2025-03-04 18:10:28.498 [info] > git rev-parse --show-toplevel [2ms]
+2025-03-04 18:10:28.507 [info] > git rev-parse --git-dir --git-common-dir [2ms]
+2025-03-04 18:10:28.514 [info] [Model][openRepository] Opened repository: /teamspace/studios/this_studio
+2025-03-04 18:10:28.520 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:10:28.524 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:10:28.525 [info] > git config --get commit.template [5ms]
+2025-03-04 18:10:28.527 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [4ms]
+2025-03-04 18:10:28.528 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:10:28.538 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [3ms]
+2025-03-04 18:10:28.542 [info] > git status -z -uall [11ms]
+2025-03-04 18:10:28.570 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [9ms]
+2025-03-04 18:10:28.571 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:10:28.572 [error] [GitHistoryProvider][resolveHEADMergeBase] Failed to resolve merge base for master: Error: No such branch: master.
+2025-03-04 18:10:28.575 [info] > git config --get commit.template [7ms]
+2025-03-04 18:10:28.579 [info] [Git][getRemotes] No remotes found in the git config file
+2025-03-04 18:10:28.581 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2025-03-04 18:10:28.581 [warning] [Git][getBranch] No such branch: master
+2025-03-04 18:10:28.589 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2ms]
+2025-03-04 18:10:28.594 [info] > git status -z -uall [10ms]
+2025-03-04 18:10:29.857 [info] > git check-ignore -v -z --stdin [3ms]
+2025-03-04 18:10:29.997 [info] > git show --textconv :README.md [3ms]
+2025-03-04 18:10:29.999 [info] > git ls-files --stage -- /teamspace/studios/this_studio/README.md [2ms]

@@ -1,0 +1,21 @@
+2025-03-04 17:10:10.110 [error] Failed to initialize Puppeteer browser: Cannot find module 'puppeteer'
+Require stack:
+- /teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/extensions/cursor-retrieval/dist/main.js
+- /teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/out/vs/workbench/api/node/extensionHostProcess.js
+2025-03-04 17:10:10.110 [error] Error: Cannot find module 'puppeteer'
+Require stack:
+- /teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/extensions/cursor-retrieval/dist/main.js
+- /teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/out/vs/workbench/api/node/extensionHostProcess.js
+	at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+	at t._resolveFilename (file:///teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/out/vs/workbench/api/node/extensionHostProcess.js:188:22873)
+	at Module._load (node:internal/modules/cjs/loader:1051:27)
+	at i._load (file:///teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/out/vs/workbench/api/node/extensionHostProcess.js:196:10962)
+	at t._load (file:///teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/out/vs/workbench/api/node/extensionHostProcess.js:188:22591)
+	at s._load (file:///teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/out/vs/workbench/api/node/extensionHostProcess.js:180:21517)
+	at Module.require (node:internal/modules/cjs/loader:1311:19)
+	at require (node:internal/modules/helpers:179:18)
+	at 758 (/teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/extensions/cursor-retrieval/dist/main.js:2:2798514)
+	at n (/teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/extensions/cursor-retrieval/dist/main.js:2:3479961)
+	at /teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/extensions/cursor-retrieval/dist/main.js:2:2378617
+	at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+	at async A.PuppeteerService.initializeBrowser (/teamspace/studios/this_studio/.cursor-server/cli/servers/Stable-be4f0962469499f009005e66867c8402202ff0b0/server/extensions/cursor-retrieval/dist/main.js:2:2378581)
