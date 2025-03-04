@@ -39,8 +39,8 @@ ENV/
 *.swp
 *.swo
 
-lightning_studio/
-
+.lightning_studio
+.cursor-server
 # OS specific
 .DS_Store
 .DS_Store?

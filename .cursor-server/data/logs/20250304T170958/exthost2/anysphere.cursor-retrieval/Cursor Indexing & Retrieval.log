@@ -276,3 +276,11 @@
 2025-03-04 18:13:52.926 [info] Aborting indexing job.
 2025-03-04 18:13:52.926 [error] We currently do not allow indexing the home directory.
 2025-03-04 18:13:52.926 [info] Indexing job successfully done or aborted.
+2025-03-04 18:14:52.926 [info] multiCodebaseIndexingJob dispose
+2025-03-04 18:14:52.926 [info] Aborting indexing job.
+2025-03-04 18:14:52.926 [error] We currently do not allow indexing the home directory.
+2025-03-04 18:14:52.926 [info] Indexing job successfully done or aborted.
+2025-03-04 18:15:52.926 [info] multiCodebaseIndexingJob dispose
+2025-03-04 18:15:52.927 [info] Aborting indexing job.
+2025-03-04 18:15:52.927 [error] We currently do not allow indexing the home directory.
+2025-03-04 18:15:52.927 [info] Indexing job successfully done or aborted.

@@ -220,3 +220,15 @@
     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
 2025-03-04 18:13:25.877 [error] Error: connect ECONNREFUSED 127.0.0.1:8502
     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+2025-03-04 18:14:42.582 [error] Error: connect ECONNREFUSED 127.0.0.1:8502
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+2025-03-04 18:14:42.587 [error] Error: connect ECONNREFUSED 127.0.0.1:8502
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+2025-03-04 18:14:42.608 [error] Error: connect ECONNREFUSED 127.0.0.1:8502
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+2025-03-04 18:15:57.544 [error] Error: connect ECONNREFUSED 127.0.0.1:8502
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+2025-03-04 18:15:57.717 [error] Error: connect ECONNREFUSED 127.0.0.1:8502
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+2025-03-04 18:15:57.848 [error] Error: connect ECONNREFUSED 127.0.0.1:8502
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
