@@ -58,46 +58,18 @@ st.markdown("""
 
 # Create a streaming callback handler for Streamlit
 class StreamHandler(BaseCallbackHandler):
-    def __init__(self, container, initial_text="", delay=0.05):
+    def __init__(self, container):
         self.container = container
-        self.text = initial_text
-        # Use the common styling function
+        self.text = ""
         self.style = get_professional_style()
         self.close_div = '</div>'
-        self.last_word = ""
-        self.words = []
-        self.delay = delay  # Delay in seconds between token displays
-        
+
     def on_llm_new_token(self, token: str, **kwargs) -> None:
-        # Add a small delay to make the streaming effect more noticeable
-        time.sleep(self.delay)
-        
-        # Add token to the text
         self.text += token
-        
-        # Split into words to display word by word
-        current_words = self.text.split()
-        
-        # If we have a new complete word
-        if len(current_words) > len(self.words):
-            self.words = current_words
-            # Display all words so far
-            display_text = " ".join(self.words)
-            self.container.markdown(f"{self.style}{display_text}▌{self.close_div}", unsafe_allow_html=True)
-        # If we're still building the same word (partial token)
-        elif len(current_words) > 0 and current_words[-1] != self.last_word:
-            self.words = current_words
-            # Display all words so far
-            display_text = " ".join(self.words)
-            self.container.markdown(f"{self.style}{display_text}▌{self.close_div}", unsafe_allow_html=True)
-        # Handle punctuation and special characters that might not create new words
-        elif token.strip() and not token.isspace():
-            display_text = self.text
-            self.container.markdown(f"{self.style}{display_text}▌{self.close_div}", unsafe_allow_html=True)
-            
-        # Update the last word
-        if len(current_words) > 0:
-            self.last_word = current_words[-1]
+        self.container.markdown(
+            f"{self.style}{self.text}▌{self.close_div}",
+            unsafe_allow_html=True
+        )
 
 # Initialize the LLM
 @st.cache_resource
@@ -111,6 +83,7 @@ def init_llm(model_name=DEFAULT_GROQ_MODEL, temperature=0.2):
         api_key=groq_api_key,
         model_name=model_name,
         temperature=temperature,
+        streaming=True  # Enable native streaming
     )
 
 # Load and process the document
@@ -198,7 +171,7 @@ def display_sidebar():
     # Model selection
     model_name = st.sidebar.selectbox(
         "Select Groq Model",
-        options=["llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"],
+        options=["deepseek-r1-distill-llama-70b","llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"],
         index=0
     )
     
@@ -212,63 +185,34 @@ def display_sidebar():
         help="Higher values make the output more random, lower values make it more deterministic"
     )
     
-    # Add streaming speed slider
-    streaming_speed = st.sidebar.slider(
-        "Streaming Speed",
-        min_value=0.01,
-        max_value=0.2,
-        value=0.05,
-        step=0.01,
-        help="Control how fast the text appears (higher value = slower typing)"
-    )
+    force_reload = False
+    # # Force reload vector store
+    # force_reload = st.sidebar.checkbox(
+    #     "Force Reload Vector Store",
+    #     value=False,
+    #     help="Recreate the vector store from scratch"
+    # )
     
-    # Chunk size and overlap
-    chunk_size = st.sidebar.slider(
-        "Chunk Size",
-        min_value=500,
-        max_value=2000,
-        value=1000,
-        step=100,
-        help="Size of text chunks for processing"
-    )
+    use_custom_prompt = True
+
+    # # Use custom prompt
+    # use_custom_prompt = st.sidebar.checkbox(
+    #     "Use Custom Prompt",
+    #     value=True,
+    #     help="Use a custom prompt template for better responses"
+    # )
     
-    chunk_overlap = st.sidebar.slider(
-        "Chunk Overlap",
-        min_value=0,
-        max_value=500,
-        value=200,
-        step=50,
-        help="Overlap between text chunks"
-    )
-    
-    # Force reload vector store
-    force_reload = st.sidebar.checkbox(
-        "Force Reload Vector Store",
-        value=False,
-        help="Recreate the vector store from scratch"
-    )
-    
-    # Use custom prompt
-    use_custom_prompt = st.sidebar.checkbox(
-        "Use Custom Prompt",
-        value=True,
-        help="Use a custom prompt template for better responses"
-    )
-    
-    # Clear chat history
-    if st.sidebar.button("Clear Chat History"):
-        st.session_state.messages = []
-        if "conversation" in st.session_state:
-            # Reset the conversation memory
-            st.session_state.conversation = None
-        st.experimental_rerun()
+    # # Clear chat history
+    # if st.sidebar.button("Clear Chat History"):
+    #     st.session_state.messages = []
+    #     if "conversation" in st.session_state:
+    #         # Reset the conversation memory
+    #         st.session_state.conversation = None
+    #     st.experimental_rerun()
     
     return {
         "model_name": model_name,
         "temperature": temperature,
-        "streaming_speed": streaming_speed,
-        "chunk_size": chunk_size,
-        "chunk_overlap": chunk_overlap,
         "force_reload": force_reload,
         "use_custom_prompt": use_custom_prompt
     }
@@ -296,31 +240,12 @@ def main():
     # Load documents with the current settings
     documents = load_documents(
         PDF_PATH, 
-        chunk_size=settings["chunk_size"], 
-        chunk_overlap=settings["chunk_overlap"]
+        chunk_size=1000,
+        chunk_overlap=200
     )
     
     # Get vector store
     vector_store = get_vector_store(documents, embeddings, settings["force_reload"])
-    
-    # Create conversation chain if it doesn't exist or settings changed
-    if ("conversation" not in st.session_state or 
-        settings["force_reload"] or 
-        st.session_state.get("last_model") != settings["model_name"] or
-        st.session_state.get("last_temperature") != settings["temperature"] or
-        st.session_state.get("last_use_custom_prompt") != settings["use_custom_prompt"]):
-        
-        # Store the base conversation without streaming callback
-        st.session_state.base_conversation = create_rag_chain(
-            vector_store, 
-            llm, 
-            _use_custom_prompt=settings["use_custom_prompt"]
-        )
-        
-        # Store current settings to detect changes
-        st.session_state.last_model = settings["model_name"]
-        st.session_state.last_temperature = settings["temperature"]
-        st.session_state.last_use_custom_prompt = settings["use_custom_prompt"]
     
     # Display chat messages
     for message in st.session_state.messages:
@@ -343,36 +268,28 @@ def main():
         # Generate response
         with st.chat_message("assistant"):
             message_placeholder = st.empty()
+            stream_handler = StreamHandler(message_placeholder)
             
-            # Create a streaming handler for this specific response
-            # Use the streaming speed from settings
-            stream_handler = StreamHandler(
-                message_placeholder, 
-                delay=settings["streaming_speed"]
-            )
-            
-            # Create a new conversation chain with the streaming handler for this specific response
-            conversation_with_streaming = create_rag_chain(
-                vector_store,
-                llm,
+            # Create conversation chain with streaming
+            conversation = create_rag_chain(
+                vector_store, 
+                llm, 
                 _use_custom_prompt=settings["use_custom_prompt"],
                 _streaming_callback=stream_handler
             )
             
             # Get response with streaming
-            response = conversation_with_streaming.invoke(
-                {"question": prompt}
-            )
-            answer = response["answer"]
+            response = conversation({"question": prompt})
+            final_response = response["answer"]
             
-            # Final display of the complete answer with the new styling
+            # Display final response without cursor
             message_placeholder.markdown(
-                f'{get_professional_style()}{answer}</div>', 
+                f'{get_professional_style()}{final_response}</div>',
                 unsafe_allow_html=True
             )
         
         # Add assistant response to chat history
-        st.session_state.messages.append({"role": "assistant", "content": answer})
+        st.session_state.messages.append({"role": "assistant", "content": final_response})
 
 if __name__ == "__main__":
     main() 
