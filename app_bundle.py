@@ -19,6 +19,18 @@ VECTOR_STORE_PATH = "faiss_index"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 DEFAULT_GROQ_MODEL = "llama3-70b-8192"
 
+# Global instances
+_global_llm = None
+_global_embeddings = None
+_global_vector_store = None
+_global_documents = None
+
+# Initialize global components at startup
+try:
+    init_global_components(force_reload=False)
+except Exception as e:
+    print(f"Warning: Failed to initialize components at startup: {str(e)}")
+
 def get_custom_prompt():
     template = """
     You are an expert on the Constitution of Nepal and your task is to provide accurate information based on the document.
@@ -93,6 +105,22 @@ def create_rag_chain(_vector_store, _llm, _use_custom_prompt=True):
     
     return ConversationalRetrievalChain.from_llm(**chain_kwargs)
 
+def init_global_components(force_reload=False):
+    """Initialize global components if they haven't been initialized yet."""
+    global _global_llm, _global_embeddings, _global_vector_store, _global_documents
+    
+    if _global_llm is None:
+        _global_llm = init_llm()
+    
+    if _global_embeddings is None:
+        _global_embeddings = init_embeddings()
+    
+    if _global_documents is None or force_reload:
+        _global_documents = load_documents(PDF_PATH)
+    
+    if _global_vector_store is None or force_reload:
+        _global_vector_store = get_vector_store(_global_documents, _global_embeddings, force_reload)
+
 def makeConstitutionQuery(params):
     """
     Make a query to the Nepal Constitution chatbot.
@@ -116,18 +144,11 @@ def makeConstitutionQuery(params):
     temperature = params.get('temperature', 0.2)
     force_reload = params.get('force_reload', False)
     
-    # Initialize components
-    llm = init_llm(model_name=model_name, temperature=temperature)
-    embeddings = init_embeddings()
+    # Initialize or reload global components if needed
+    init_global_components(force_reload)
     
-    # Load documents
-    documents = load_documents(PDF_PATH)
-    
-    # Get vector store
-    vector_store = get_vector_store(documents, embeddings, force_reload)
-    
-    # Create conversation chain
-    conversation = create_rag_chain(vector_store, llm)
+    # Create conversation chain with global components
+    conversation = create_rag_chain(_global_vector_store, _global_llm)
     
     # Get response
     response = conversation({"question": question})
@@ -154,8 +175,10 @@ def makeRawLLMQuery(params):
     model_name = params.get('model_name', DEFAULT_GROQ_MODEL)
     temperature = params.get('temperature', 0.2)
     
-    # Initialize LLM
-    llm = init_llm(model_name=model_name, temperature=temperature)
+    # Initialize global LLM if needed
+    global _global_llm
+    if _global_llm is None:
+        _global_llm = init_llm(model_name=model_name, temperature=temperature)
     
     # Create prompt template
     template = """
@@ -171,7 +194,7 @@ def makeRawLLMQuery(params):
     
     # Format and send prompt
     formatted_prompt = prompt.format(question=question)
-    response = llm.invoke(formatted_prompt)
+    response = _global_llm.invoke(formatted_prompt)
     
     return response.content
 

@@ -1,0 +1,16 @@
+
+=== Final Evaluation Results ===
+Total comparisons: 12
+
+RAG Model Win Rate: 58.33%
+Raw LLM Win Rate: 41.67%
+
+RAG Model Metrics:
+  Accuracy: 0.943
+  On-pointness: 0.886
+
+Raw LLM Metrics:
+  Accuracy: 0.960
+  On-pointness: 0.950
+
+=== Evaluation Complete ===
