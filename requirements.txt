@@ -1,5 +1,5 @@
 langchain==0.1.5
-langchain-groq==0.0.6
+langchain-groq
 langchain-community==0.0.16
 pypdf==3.17.1
 faiss-cpu==1.7.4
