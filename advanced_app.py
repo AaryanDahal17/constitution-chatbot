@@ -171,7 +171,7 @@ def display_sidebar():
     # Model selection
     model_name = st.sidebar.selectbox(
         "Select Groq Model",
-        options=["deepseek-r1-distill-llama-70b","llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"],
+        options=["llama3-70b-8192","deepseek-r1-distill-llama-70b", "llama3-8b-8192", "mixtral-8x7b-32768"],
         index=0
     )
     
