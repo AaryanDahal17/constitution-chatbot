@@ -40,28 +40,33 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Ask user which version to run
-echo -e "${GREEN}Which version would you like to run?${NC}"
-echo "1) Command-line version (app.py)"
-echo "2) Basic web interface (streamlit_app.py)"
-echo "3) Advanced web interface (advanced_app.py)"
-read -p "Enter your choice (1-3): " choice
 
-case $choice in
-    1)
-        echo -e "${GREEN}Starting command-line version...${NC}"
-        python app.py
-        ;;
-    2)
-        echo -e "${GREEN}Starting basic web interface...${NC}"
-        streamlit run streamlit_app.py
-        ;;
-    3)
-        echo -e "${GREEN}Starting advanced web interface...${NC}"
-        streamlit run advanced_app.py
-        ;;
-    *)
-        echo -e "${RED}Invalid choice. Exiting.${NC}"
-        exit 1
-        ;;
-esac 
+echo -e "Starting advanced web interface..."
+streamlit run advanced_app.py
+
+
+# # Ask user which version to run
+# echo -e "${GREEN}Which version would you like to run?${NC}"
+# echo "1) Command-line version (app.py)"
+# echo "2) Basic web interface (streamlit_app.py)"
+# echo "3) Advanced web interface (advanced_app.py)"
+# read -p "Enter your choice (1-3): " choice
+
+# case $choice in
+#     1)
+#         echo -e "${GREEN}Starting command-line version...${NC}"
+#         python app.py
+#         ;;
+#     2)
+#         echo -e "${GREEN}Starting basic web interface...${NC}"
+#         streamlit run streamlit_app.py
+#         ;;
+#     3)
+#         echo -e "${GREEN}Starting advanced web interface...${NC}"
+#         streamlit run advanced_app.py
+#         ;;
+#     *)
+#         echo -e "${RED}Invalid choice. Exiting.${NC}"
+#         exit 1
+#         ;;
+# esac 
