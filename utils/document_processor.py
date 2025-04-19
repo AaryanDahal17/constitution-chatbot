@@ -1,30 +1,28 @@
 import streamlit as st
-from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from utils.config import DEFAULT_CHUNK_SIZE, DEFAULT_CHUNK_OVERLAP
+from utils.config import DEFAULT_CHUNK_SIZE, DEFAULT_CHUNK_OVERLAP, CONSTITUTION_DATASET_PATH
+from utils.json_loader import ConstitutionJsonLoader
 
 @st.cache_resource
-def load_documents(file_path, chunk_size=DEFAULT_CHUNK_SIZE, chunk_overlap=DEFAULT_CHUNK_OVERLAP):
-    """Load and process documents from PDF
+def load_documents(dataset_path=CONSTITUTION_DATASET_PATH, chunk_size=DEFAULT_CHUNK_SIZE, chunk_overlap=DEFAULT_CHUNK_OVERLAP):
+    """Load and process documents from the Constitution JSON dataset
     
     Args:
-        file_path: Path to the PDF file
+        dataset_path: Path to the constitution dataset folder
         chunk_size: Size of text chunks
         chunk_overlap: Overlap between chunks
         
     Returns:
         List of document chunks
     """
-    loader = PyPDFLoader(file_path)
+    # Use our custom loader for the JSON dataset
+    loader = ConstitutionJsonLoader(dataset_path)
     documents = loader.load()
     
-    # Add page number information in metadata
-    for doc in documents:
-        if 'page' not in doc.metadata:
-            # Convert 0-based index to 1-based page number
-            page_number = doc.metadata.get('page_number', 0) + 1
-            doc.metadata['page'] = page_number
+    # Log the number of documents loaded
+    st.sidebar.success(f"Loaded {len(documents)} constitution articles")
     
+    # Split documents into chunks for better searching
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
@@ -35,11 +33,16 @@ def load_documents(file_path, chunk_size=DEFAULT_CHUNK_SIZE, chunk_overlap=DEFAU
     # Ensure all chunks have proper metadata
     for i, chunk in enumerate(chunks):
         chunk.metadata['chunk_id'] = i
-        # If 'page' is missing, preserve page from original doc
-        if 'page' not in chunk.metadata and 'source' in chunk.metadata:
-            # Extract page from source if available (e.g., "path/to/file:page")
-            source = chunk.metadata['source']
-            if ':' in source:
-                chunk.metadata['page'] = int(source.split(':')[-1]) + 1  # Convert to 1-based
+        
+        # Add article and part info to help with references
+        if 'article_number' not in chunk.metadata and 'source' in chunk.metadata:
+            # Try to extract article info from source document if not already present
+            for doc in documents:
+                if doc.metadata.get('source') == chunk.metadata.get('source'):
+                    chunk.metadata['article_number'] = doc.metadata.get('article_number')
+                    chunk.metadata['article'] = doc.metadata.get('article')
+                    chunk.metadata['part'] = doc.metadata.get('part')
+                    chunk.metadata['part_title'] = doc.metadata.get('part_title')
+                    break
     
     return chunks 

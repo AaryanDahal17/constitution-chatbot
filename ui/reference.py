@@ -90,46 +90,63 @@ def display_references(matches: Dict[str, List], answer_text: str):
     # Create tabs for each document with matches
     if len(matches) > 0:
         all_tabs = []
+        tab_metadata = []
+        
+        # Prepare tabs for references
         for doc_id, match_list in matches.items():
             for i, (match_text, metadata) in enumerate(match_list):
-                page_num = metadata.get('page', 'N/A')
-                tab_label = f"Page {page_num}"
+                # Get article information for the tab label
+                article_num = metadata.get('article_number', 'N/A')
+                part_num = metadata.get('part', 'N/A')
+                
+                # Create a descriptive label
+                if part_num == "Preamble" or article_num == 0:
+                    tab_label = "Preamble"
+                else:
+                    tab_label = f"Article {article_num}"
+                
                 all_tabs.append(tab_label)
+                tab_metadata.append((match_text, metadata))
         
         # Only create tabs if we have content
         if all_tabs:
             tabs = st.tabs(all_tabs)
             
             # Fill each tab with content
-            tab_index = 0
-            for doc_id, match_list in matches.items():
-                for i, (match_text, metadata) in enumerate(match_list):
-                    with tabs[tab_index]:
-                        # Show highlighted content
-                        highlighted_text = format_highlighted_text(
-                            metadata.get('source_text', match_text), 
-                            match_text
-                        )
-                        
-                        # Show some metadata about the source
-                        page_num = metadata.get('page', 'N/A')
-                        st.markdown(f"**Source**: Constitution of Nepal, Page {page_num}")
-                        
-                        # Display the highlighted text with explicit text color
-                        st.markdown(
-                            f"""<div style="background-color: #f1faee; 
-                                   border: 1px solid #457b9d; 
-                                   border-radius: 4px; 
-                                   padding: 10px; 
-                                   margin: 5px 0; 
-                                   max-height: 300px; 
-                                   overflow-y: auto;
-                                   color: #333333;">
-                                {highlighted_text}
-                            </div>""", 
-                            unsafe_allow_html=True
-                        )
-                    tab_index += 1
+            for tab_index, (tab, (match_text, metadata)) in enumerate(zip(tabs, tab_metadata)):
+                with tab:
+                    # Show highlighted content
+                    highlighted_text = format_highlighted_text(
+                        metadata.get('source_text', match_text), 
+                        match_text
+                    )
+                    
+                    # Show some metadata about the source
+                    article_num = metadata.get('article_number', 'N/A')
+                    article_title = metadata.get('article', 'N/A')
+                    part_num = metadata.get('part', 'N/A')
+                    part_title = metadata.get('part_title', 'N/A')
+                    
+                    # Display the article reference information
+                    if part_num == "Preamble" or article_num == 0:
+                        st.markdown(f"**Source**: Constitution Preamble")
+                    else:
+                        st.markdown(f"**Source**: Part {part_num}: {part_title}, Article {article_num}: {article_title}")
+                    
+                    # Display the highlighted text
+                    st.markdown(
+                        f"""<div style="background-color: #f1faee; 
+                               border: 1px solid #457b9d; 
+                               border-radius: 4px; 
+                               padding: 10px; 
+                               margin: 5px 0; 
+                               max-height: 300px; 
+                               overflow-y: auto;
+                               color: #333333;">
+                            {highlighted_text}
+                        </div>""", 
+                        unsafe_allow_html=True
+                    )
 
 def init_reference_css():
     """Initialize CSS for reference components"""
@@ -142,7 +159,7 @@ def init_reference_css():
     
     /* Tab styling with guaranteed visible text */
     .stTabs [data-baseweb="tab"] {
-        height: 30px;
+        height: 35px;
         background-color: #457b9d;
         border-radius: 4px;
         padding: 0 16px;
