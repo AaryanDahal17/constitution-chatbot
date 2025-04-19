@@ -1,85 +1,48 @@
-import os
-from dotenv import load_dotenv
-from langchain.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_groq import ChatGroq
-from langchain.chains import ConversationalRetrievalChain
-from langchain.memory import ConversationBufferMemory
-
-# Load environment variables
-load_dotenv()
-
-# Initialize the LLM
-def init_llm():
-    groq_api_key = os.getenv("GROQ_API_KEY")
-    if not groq_api_key:
-        raise ValueError("GROQ_API_KEY not found in environment variables")
-    
-    return ChatGroq(
-        api_key=groq_api_key,
-        model_name="llama3-70b-8192",
-        temperature=0.2,
-    )
-
-# Load and process the document
-def load_documents(file_path):
-    loader = PyPDFLoader(file_path)
-    documents = loader.load()
-    
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=200,
-    )
-    
-    return text_splitter.split_documents(documents)
-
-# Initialize embeddings model
-def init_embeddings():
-    return HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-
-# Create vector store
-def create_vector_store(documents, embeddings):
-    return FAISS.from_documents(documents, embeddings)
-
-# Create RAG chain
-def create_rag_chain(vector_store, llm):
-    memory = ConversationBufferMemory(
-        memory_key="chat_history",
-        return_messages=True
-    )
-    
-    return ConversationalRetrievalChain.from_llm(
-        llm=llm,
-        retriever=vector_store.as_retriever(search_kwargs={"k": 4}),
-        memory=memory,
-        verbose=True,
-    )
+import streamlit as st
+from ui.styling import set_page_config, apply_custom_css
+from ui.sidebar import display_sidebar
+from ui.chat import init_chat_state, display_chat_history, handle_user_input
+from utils.llm import init_llm
+from utils.embedding import init_embeddings
+from utils.document_processor import load_documents
+from utils.vector_store import get_vector_store
+from utils.config import PDF_PATH
 
 def main():
-    print("Loading Nepal Constitution RAG Chatbot...")
+    """Main application entry point"""
+    # Initialize page configuration and styling
+    set_page_config()
+    apply_custom_css()
+    
+    # App title and description
+    st.markdown('<p class="main-header">📚 Constitution Chatbot</p>', unsafe_allow_html=True)
+    st.markdown("""
+    <p class="sub-header">
+    Ask questions about the constitution document and get accurate answers with source references.
+    </p>
+    """, unsafe_allow_html=True)
+    
+    # Get settings from sidebar
+    settings = display_sidebar()
+    
+    # Initialize chat state
+    init_chat_state()
     
     # Initialize components
-    llm = init_llm()
-    documents = load_documents("nepal-constitution.pdf")
+    llm = init_llm(model_name=settings["model_name"], temperature=settings["temperature"])
     embeddings = init_embeddings()
-    vector_store = create_vector_store(documents, embeddings)
-    qa_chain = create_rag_chain(vector_store, llm)
     
-    print("Chatbot is ready! Ask questions about the Nepal Constitution.")
-    print("Type 'exit' to end the conversation.")
+    # Load documents
+    documents = load_documents(PDF_PATH)
     
-    while True:
-        query = input("\nYour question: ")
-        
-        if query.lower() == 'exit':
-            print("Thank you for using the Nepal Constitution RAG Chatbot!")
-            break
-        
-        result = qa_chain.invoke({"question": query})
-        print("\nAnswer:", result["answer"])
-
+    # Get vector store
+    vector_store = get_vector_store(documents, embeddings, settings["force_reload"])
+    
+    # Display chat history
+    display_chat_history()
+    
+    # Handle user input
+    handle_user_input(vector_store, llm, settings)
 
 if __name__ == "__main__":
     main() 
