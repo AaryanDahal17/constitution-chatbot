@@ -1,5 +1,5 @@
 import streamlit as st
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 from utils.text_matcher import format_highlighted_text
 
 def create_reference_button(ref_id: str, page_num: int) -> str:
@@ -74,118 +74,162 @@ def create_toggle_script() -> str:
     """
 
 def display_references(matches: Dict[str, List], answer_text: str):
-    """Display reference buttons and containers for matches using Streamlit components.
+    """Display references as tabs with enhanced document information
     
     Args:
         matches: Dictionary of matches from highlight_matches
         answer_text: The answer text
     """
     if not matches:
+        st.info("No specific references found for this answer.")
         return
     
-    # Add a subtle divider
-    st.markdown("---")
-    st.markdown("<small style='color: #666;'>References:</small>", unsafe_allow_html=True)
+    # Group references by page number for better organization
+    pages_dict = {}
+    section_dict = {}
     
-    # Create tabs for each document with matches
-    if len(matches) > 0:
-        all_tabs = []
-        tab_metadata = []
-        
-        # Prepare tabs for references
-        for doc_id, match_list in matches.items():
-            for i, (match_text, metadata) in enumerate(match_list):
-                # Get article information for the tab label
-                article_num = metadata.get('article_number', 'N/A')
-                part_num = metadata.get('part', 'N/A')
+    # Process and organize references by type
+    for doc_id, match_list in matches.items():
+        for match_text, metadata in match_list:
+            # Check if this is a section reference
+            if 'is_section' in metadata and metadata['is_section']:
+                section_type = metadata.get('section_type', 'Section')
+                section_number = metadata.get('section_number', '')
+                section_key = f"{section_type} {section_number}"
                 
-                # Create a descriptive label
-                if part_num == "Preamble" or article_num == 0:
-                    tab_label = "Preamble"
-                else:
-                    tab_label = f"Article {article_num}"
-                
-                all_tabs.append(tab_label)
-                tab_metadata.append((match_text, metadata))
+                if section_key not in section_dict:
+                    section_dict[section_key] = {
+                        "page": metadata.get('page', 'Unknown'),
+                        "matches": [],
+                        "metadata": metadata
+                    }
+                section_dict[section_key]["matches"].append(match_text)
+            else:
+                # Regular page reference
+                page_num = metadata.get('page', 'Unknown')
+                if page_num not in pages_dict:
+                    pages_dict[page_num] = {
+                        "matches": [],
+                        "metadata": metadata
+                    }
+                pages_dict[page_num]["matches"].append(match_text)
+    
+    # Create tabs for references
+    if section_dict or pages_dict:
+        # Determine what kinds of tabs to show
+        tab_names = []
         
-        # Only create tabs if we have content
-        if all_tabs:
-            tabs = st.tabs(all_tabs)
+        # Add section tabs first (they're usually more specific)
+        for section_key in sorted(section_dict.keys()):
+            page_num = section_dict[section_key]["page"]
+            tab_names.append(f"{section_key} (Page {page_num})")
+        
+        # Then add regular page tabs 
+        for page_num in sorted(pages_dict.keys()):
+            # Skip pages that are already covered by sections
+            if any(section_dict[s]["page"] == page_num for s in section_dict):
+                continue
+            tab_names.append(f"Page {page_num}")
+        
+        # Create tab interface
+        if tab_names:
+            tabs = st.tabs(tab_names)
             
-            # Fill each tab with content
-            for tab_index, (tab, (match_text, metadata)) in enumerate(zip(tabs, tab_metadata)):
-                with tab:
-                    # Show highlighted content
-                    highlighted_text = format_highlighted_text(
-                        metadata.get('source_text', match_text), 
-                        match_text
-                    )
+            # Fill section tabs
+            tab_index = 0
+            for section_key in sorted(section_dict.keys()):
+                section_data = section_dict[section_key]
+                with tabs[tab_index]:
+                    # Show section metadata
+                    st.caption(f"Reference: {section_key}")
                     
-                    # Show some metadata about the source
-                    article_num = metadata.get('article_number', 'N/A')
-                    article_title = metadata.get('article', 'N/A')
-                    part_num = metadata.get('part', 'N/A')
-                    part_title = metadata.get('part_title', 'N/A')
+                    # Create a container for the content
+                    content_container = st.container(border=True)
+                    with content_container:
+                        # Get full source text if available
+                        source_text = section_data["metadata"].get('source_text', '')
+                        
+                        if source_text:
+                            highlighted_text = source_text
+                            # Highlight each match in the source text
+                            for match in section_data["matches"]:
+                                if match in source_text:
+                                    highlighted_text = highlighted_text.replace(
+                                        match,
+                                        f'<span style="background-color: #FFA500; color: #000000; font-weight: 500;">{match}</span>'
+                                    )
+                            st.markdown(highlighted_text, unsafe_allow_html=True)
+                        else:
+                            # Just show the matches if we don't have the full source
+                            for match in section_data["matches"]:
+                                st.markdown(f"• {match}")
+                
+                tab_index += 1
+            
+            # Fill page tabs
+            for page_num in sorted(pages_dict.keys()):
+                # Skip pages that are already covered by sections
+                if any(section_dict[s]["page"] == page_num for s in section_dict):
+                    continue
                     
-                    # Display the article reference information
-                    if part_num == "Preamble" or article_num == 0:
-                        st.markdown(f"**Source**: Constitution Preamble")
-                    else:
-                        st.markdown(f"**Source**: Part {part_num}: {part_title}, Article {article_num}: {article_title}")
+                page_data = pages_dict[page_num]
+                with tabs[tab_index]:
+                    # Show page information
+                    st.caption(f"Page {page_num} Reference")
                     
-                    # Display the highlighted text
-                    st.markdown(
-                        f"""<div style="background-color: #f1faee; 
-                               border: 1px solid #457b9d; 
-                               border-radius: 4px; 
-                               padding: 10px; 
-                               margin: 5px 0; 
-                               max-height: 300px; 
-                               overflow-y: auto;
-                               color: #333333;">
-                            {highlighted_text}
-                        </div>""", 
-                        unsafe_allow_html=True
-                    )
+                    # Create a container for the content
+                    content_container = st.container(border=True)
+                    with content_container:
+                        # Get full source text if available
+                        source_text = page_data["metadata"].get('source_text', '')
+                        
+                        if source_text:
+                            highlighted_text = source_text
+                            # Highlight each match in the source text
+                            for match in page_data["matches"]:
+                                if match in source_text:
+                                    highlighted_text = highlighted_text.replace(
+                                        match,
+                                        f'<span style="background-color: #FFA500; color: #000000; font-weight: 500;">{match}</span>'
+                                    )
+                            st.markdown(highlighted_text, unsafe_allow_html=True)
+                        else:
+                            # Just show the matches if we don't have the full source
+                            for match in page_data["matches"]:
+                                st.markdown(f"• {match}")
+                
+                tab_index += 1
 
 def init_reference_css():
     """Initialize CSS for reference components"""
     st.markdown("""
     <style>
-    /* Style the reference section */
-    .stTabs [data-baseweb="tab-list"] {
+    /* Reference styling */
+    [data-testid="stTabs"] [data-baseweb="tab-list"] {
         gap: 8px;
     }
     
-    /* Tab styling with guaranteed visible text */
-    .stTabs [data-baseweb="tab"] {
-        height: 35px;
+    [data-testid="stTabs"] [data-baseweb="tab"] {
         background-color: #457b9d;
         border-radius: 4px;
-        padding: 0 16px;
+        padding: 4px 12px;
+        margin: 0;
     }
     
-    /* Override internal Streamlit tab styles to ensure text visibility */
-    .stTabs [data-baseweb="tab"] div {
-        color: #FFFFFF !important;
-        font-weight: 500 !important;
+    /* Make sure tab text is visible */
+    [data-testid="stTabs"] [data-baseweb="tab"] div {
+        color: white !important;
+        font-weight: 500;
     }
     
-    /* Selected tab styling */
-    .stTabs [aria-selected="true"] {
+    [data-testid="stTabs"] [data-baseweb="tab-highlight"] {
         background-color: #1d3557;
     }
     
-    /* Highlighted text styles */
+    /* Highlighted text styling */
     span[style*="background-color: #FFA500"] {
         padding: 2px 0;
         border-radius: 2px;
-        color: black !important;
-    }
-    
-    /* Ensure text is visible in all contexts */
-    .stTabs [role="tabpanel"] {
-        color: #333333;
     }
     </style>
     """, unsafe_allow_html=True) 

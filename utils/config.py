@@ -5,8 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Constants
-# Use the JSON dataset instead of the PDF
-CONSTITUTION_DATASET_PATH = "constitution-of-nepal-dataset"
+PDF_PATH = "c2_better.pdf"
 VECTOR_STORE_PATH = "faiss_index"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 DEFAULT_GROQ_MODEL = "llama3-70b-8192"

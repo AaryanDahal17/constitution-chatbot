@@ -9,6 +9,8 @@ def init_chat_state():
     """Initialize chat state if not already done"""
     if "messages" not in st.session_state:
         st.session_state.messages = []
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = []
     # Initialize reference CSS
     init_reference_css()
 
@@ -27,7 +29,7 @@ def display_chat_history():
                     display_references(message["references"], message["content"])
 
 def handle_user_input(vector_store, llm, settings):
-    """Process user input and generate response
+    """Process user input and generate response with enhanced document structure
     
     Args:
         vector_store: FAISS vector store
@@ -35,7 +37,7 @@ def handle_user_input(vector_store, llm, settings):
         settings: Settings from sidebar
     """
     # Get user input from chat input
-    prompt = st.chat_input("Ask a question about the Nepal Constitution")
+    prompt = st.chat_input("Ask a question about the constitution document")
     
     if prompt:
         # Add user message to chat history
@@ -51,6 +53,15 @@ def handle_user_input(vector_store, llm, settings):
             stream_handler = StreamHandler(message_placeholder)
             
             try:
+                # Format chat history for the chain
+                formatted_history = []
+                for i in range(0, len(st.session_state.chat_history), 2):
+                    if i + 1 < len(st.session_state.chat_history):
+                        formatted_history.append({
+                            "human": st.session_state.chat_history[i],
+                            "ai": st.session_state.chat_history[i+1]
+                        })
+                
                 # Create conversation chain with streaming
                 conversation = create_rag_chain(
                     vector_store, 
@@ -59,16 +70,26 @@ def handle_user_input(vector_store, llm, settings):
                     _streaming_callback=stream_handler
                 )
                 
-                # Get response with streaming
-                response = conversation({"question": prompt})
-                final_response = response["answer"]
+                # Show thinking indicator
+                thinking_placeholder = st.empty()
+                thinking_placeholder.info("Searching document and analyzing context...")
                 
-                # Process source documents to find matching text
+                # Get response with streaming
+                response = conversation({
+                    "question": prompt, 
+                    "chat_history": formatted_history
+                })
+                
+                # Clear thinking indicator
+                thinking_placeholder.empty()
+                
+                # Extract response components
+                final_response = response["answer"]
                 source_docs = response.get("source_documents", [])
                 
                 # Show "searching for references" message during processing
                 ref_placeholder = st.empty()
-                ref_placeholder.info("Finding constitutional references...")
+                ref_placeholder.info("Finding and formatting document references...")
                 
                 # Extract matches - this should always return at least something now
                 matches = highlight_matches(source_docs, final_response)
@@ -85,6 +106,10 @@ def handle_user_input(vector_store, llm, settings):
                 # Display reference buttons and source info 
                 # This should always show something now due to our fallback mechanisms
                 display_references(matches, final_response)
+                
+                # Update dialogue history for context
+                st.session_state.chat_history.append(prompt)
+                st.session_state.chat_history.append(final_response)
                 
                 # Store the response and matches in session state
                 response_data = {

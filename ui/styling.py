@@ -19,10 +19,6 @@ def apply_custom_css():
             background-color: #f1faee;
         }
         
-        /* Ensure text visibility in main content */
-        p, div, span {
-            color: #333333;
-        }
         
         /* HEADER/NAVBAR STYLING - COMPREHENSIVE */
         /* Main navbar container */

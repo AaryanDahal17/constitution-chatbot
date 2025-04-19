@@ -58,6 +58,14 @@ def find_matching_text(source_text: str, answer_text: str) -> List[str]:
     if single_quotes:
         quote_matches.extend(single_quotes)
     
+    # Look for article/section references in the answer
+    article_refs = []
+    ref_pattern = r"(Article|ARTICLE|Art\.|Section|SECTION|\bSec\.\s*)\s*(\d+[A-Za-z]*)"
+    ref_matches = re.finditer(ref_pattern, answer_text)
+    
+    for match in ref_matches:
+        article_refs.append(f"{match.group(1)} {match.group(2)}")
+    
     # For direct quotes, find the exact matching sentences
     exact_matches = []
     for quote in quote_matches:
@@ -115,12 +123,51 @@ def highlight_matches(source_docs: List[Dict], answer_text: str) -> Dict[str, Li
     
     # If no source documents provided, handle gracefully
     if not source_docs:
-        st.warning("No source documents found for this answer. The information may not be directly from the Constitution.")
+        st.warning("No source documents found for this answer. The information may not be directly from the document.")
         return results
     
+    # Extract article/section references from the answer
+    article_pattern = r"(Article|ARTICLE|Art\.|Section|SECTION|\bSec\.\s*)\s*(\d+[A-Za-z]*)"
+    article_refs = []
+    
+    for match in re.finditer(article_pattern, answer_text):
+        article_refs.append(f"{match.group(1)} {match.group(2)}".lower())
+    
+    # First prioritize documents that are explicitly referenced sections
+    section_matches = {}
+    for doc in source_docs:
+        # Check if this is a section document
+        if doc.metadata.get('is_section', False):
+            section_id = f"{doc.metadata.get('section_type', 'Section')} {doc.metadata.get('section_number', '')}".lower()
+            
+            # If this section is referenced in the answer, prioritize it
+            if section_id in article_refs:
+                doc_id = f"section_{doc.metadata.get('section_type', 'unknown')}_{doc.metadata.get('section_number', 'unknown')}"
+                
+                # Use the section context as the match
+                metadata = doc.metadata.copy()
+                metadata['source_text'] = doc.page_content
+                metadata['match_type'] = 'direct_section_reference'
+                
+                # Split into sentences to get the most relevant part
+                sentences = re.split(r'(?<=[.!?])\s+', doc.page_content)
+                if sentences:
+                    intro_text = sentences[0]  # First sentence often has the title/intro
+                    section_matches[doc_id] = [(intro_text, metadata)]
+    
+    # If we have direct section matches, use those
+    if section_matches:
+        return section_matches
+    
+    # Otherwise fallback to regular content matching
     for doc in source_docs:
         doc_text = doc.page_content
-        doc_id = f"doc_{doc.metadata.get('chunk_id', 'unknown')}"
+        
+        # Create more descriptive IDs based on metadata
+        if doc.metadata.get('is_section', False):
+            doc_id = f"section_{doc.metadata.get('section_type', 'unknown')}_{doc.metadata.get('section_number', 'unknown')}"
+        else:
+            doc_id = f"page_{doc.metadata.get('page', 'unknown')}"
         
         # Store the full text in metadata for reference
         metadata = doc.metadata.copy()
@@ -141,7 +188,11 @@ def highlight_matches(source_docs: List[Dict], answer_text: str) -> Dict[str, Li
     if not results and source_docs:
         doc = source_docs[0]
         doc_text = doc.page_content
-        doc_id = f"doc_{doc.metadata.get('chunk_id', 'unknown')}"
+        
+        if doc.metadata.get('is_section', False):
+            doc_id = f"section_{doc.metadata.get('section_type', 'unknown')}_{doc.metadata.get('section_number', 'unknown')}"
+        else:
+            doc_id = f"page_{doc.metadata.get('page', 'unknown')}"
         
         metadata = doc.metadata.copy()
         metadata['source_text'] = doc_text
